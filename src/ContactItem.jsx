@@ -4,7 +4,7 @@ import ContactItemBody from "./ContactItemBody";
 
 const ContactItem = ({ imgURL, name, tag }) => {
   return (
-    <div>
+    <div className="contact-item">
       <ContactItemImage imgURL={imgURL} />
       <ContactItemBody name={name} tag={tag} />
     </div>
