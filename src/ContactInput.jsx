@@ -1,4 +1,5 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 class ContactInput extends React.Component {
   constructor(props) {
@@ -64,5 +65,10 @@ class ContactInput extends React.Component {
     );
   }
 }
+
+// validation input user
+ContactInput.propTypes = {
+  addContact: PropTypes.func.isRequired,
+};
 
 export default ContactInput;

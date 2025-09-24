@@ -1,0 +1,40 @@
+import React from "react";
+import { deleteContact, getContacts } from "../../src/data";
+import ContactList from "../../src/ContactList";
+
+class HomePage extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      contacts: getContacts(),
+    };
+  }
+
+  // delete handler method
+  onDeleteHandler(id) {
+    deleteContact(id);
+
+    // update contact state from data.js
+
+    this.setState(() => {
+      return {
+        contacts: getContacts(),
+      };
+    });
+  }
+
+  render() {
+    return (
+      <section>
+        <h2>Daftar Kontak</h2>
+        <ContactList
+          contacts={this.state.contacts}
+          onDelete={this.onDeleteHandler}
+        />
+      </section>
+    );
+  }
+}
+
+export default HomePage;

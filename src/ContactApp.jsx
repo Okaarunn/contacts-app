@@ -1,5 +1,5 @@
 import React from "react";
-import { Contacts } from "./data.js";
+import { getContacts } from "./data.js";
 import ContactList from "./ContactList.jsx";
 import ContactInput from "./ContactInput.jsx";
 
@@ -8,7 +8,7 @@ class ContactApp extends React.Component {
     super(props);
 
     this.state = {
-      contacts: Contacts(),
+      contacts: getContacts(),
     };
 
     // set bind event handler
