@@ -1,56 +1,24 @@
 import React from "react";
-import { getContacts } from "./data.js";
-import ContactList from "./ContactList.jsx";
-import ContactInput from "./ContactInput.jsx";
+import { Route, Routes } from "react-router-dom";
+import HomePage from "../pages/HomePage";
+import AddPage from "../pages/AddPage";
+import Navigation from "./Navigation";
 
-class ContactApp extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      contacts: getContacts(),
-    };
-
-    // set bind event handler
-    this.onDeleteHandler = this.onDeleteHandler.bind(this);
-    this.onAddContactHandler = this.onAddContactHandler.bind(this);
-  }
-
-  // add contact function
-  onAddContactHandler({ name, tag }) {
-    this.setState((prevState) => {
-      return {
-        contacts: [
-          ...prevState.contacts,
-          {
-            id: +new Date(),
-            name,
-            tag,
-            imgURL: "default.jpg",
-          },
-        ],
-      };
-    });
-  }
-
-  // ondelete method
-  onDeleteHandler(id) {
-    const contacts = this.state.contacts.filter((contact) => contact.id !== id);
-    this.setState({ contacts });
-  }
-
-  render() {
-    return (
-      <div className="contact-app">
-        <h1>Daftar kontak</h1>
-        <ContactInput addContact={this.onAddContactHandler} />
-        <ContactList
-          contacts={this.state.contacts}
-          onDelete={this.onDeleteHandler}
-        />
-      </div>
-    );
-  }
+function ContactApp() {
+  return (
+    <div className="contact-app">
+      <header className="contact-app__header">
+        <h1>Aplikasi Kontak</h1>
+        <Navigation />
+      </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/add" element={<AddPage />} />
+        </Routes>
+      </main>
+    </div>
+  );
 }
 
 export default ContactApp;

@@ -1,6 +1,6 @@
 import React from "react";
-import { deleteContact, getContacts } from "../../src/data";
-import ContactList from "../../src/ContactList";
+import ContactList from "../components/ContactList";
+import { deleteContact, getContacts } from "../utils/data";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -9,14 +9,13 @@ class HomePage extends React.Component {
     this.state = {
       contacts: getContacts(),
     };
+
+    this.onDeleteHandler = this.onDeleteHandler.bind(this);
   }
 
-  // delete handler method
   onDeleteHandler(id) {
     deleteContact(id);
-
-    // update contact state from data.js
-
+    // update the contact state from data.js
     this.setState(() => {
       return {
         contacts: getContacts(),

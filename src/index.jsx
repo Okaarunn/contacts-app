@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import ContactApp from "./ContactApp";
+import ContactApp from "./components/ContactApp";
 import "./style.css";
 
 import { BrowserRouter } from "react-router-dom";
