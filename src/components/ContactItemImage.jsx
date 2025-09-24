@@ -1,11 +1,16 @@
-import React from 'react';
+import PropTypes from "prop-types";
+import React from "react";
 
-function ContactItemImage({ imageUrl }) {
- return (
-   <div className="contact-item__image">
-     <img src={imageUrl} alt="contact avatar"/>
-   </div>
- );
-}
+const ContactItemImage = ({ imgURL }) => {
+  return (
+    <div className="contact-item__image">
+      <img src={`/images/${imgURL}`} alt="Contact Avatar" />
+    </div>
+  );
+};
+
+ContactItemImage.propTypes = {
+  imgURL: PropTypes.string.isRequired,
+};
 
 export default ContactItemImage;
