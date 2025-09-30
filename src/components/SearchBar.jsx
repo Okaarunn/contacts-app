@@ -7,7 +7,7 @@ function SearchBar({ keyword, keywordChange }) {
       className="search-bar"
       placeholder="Cari berdasarkan nama"
       value={keyword}
-      onChange={(e) => keywordChange(event.target.value)}
+      onChange={(e) => keywordChange(e.target.value)}
     />
   );
 }
