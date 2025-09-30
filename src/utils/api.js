@@ -48,7 +48,7 @@ async function register({ name, email, password }) {
   const response = await fetch(`${API_URL}/register`, {
     method: "POST",
     headers: {
-      "Content-type": "application/json",
+      "Content-Type": "application/json",
     },
 
     body: JSON.stringify({ name, email, password }),
@@ -78,11 +78,11 @@ async function getUserLogged() {
 }
 
 // add contact method
-async function addContact(name, tag) {
+async function addContact({ name, tag }) {
   const response = await fetchWithToken(`${API_URL}/contacts`, {
     method: "POST",
     headers: {
-      "Contact-Type": "application/json",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ name, tag }),
   });
@@ -90,6 +90,7 @@ async function addContact(name, tag) {
   const responseJson = await response.json();
 
   if (responseJson.status !== "success") {
+    alert(responseJson.message);
     return { error: true };
   }
 

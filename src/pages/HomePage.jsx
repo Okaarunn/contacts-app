@@ -1,6 +1,6 @@
 import React from "react";
 import ContactList from "../components/ContactList";
-import { deleteContact, getContacts } from "../utils/data";
+import { getContacts, deleteContact } from "../utils/api";
 import SearchBar from "../components/SearchBar";
 import { useSearchParams } from "react-router-dom";
 
@@ -23,7 +23,7 @@ class HomePage extends React.Component {
     super(props);
 
     this.state = {
-      contacts: getContacts(),
+      contacts: [],
       keyword: props.defaultKeyword || "",
     };
 
@@ -31,12 +31,25 @@ class HomePage extends React.Component {
     this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
   }
 
-  onDeleteHandler(id) {
-    deleteContact(id);
-    // update the contact state from data.js
+  async componentDidMount() {
+    const { data } = await getContacts();
+
     this.setState(() => {
       return {
-        contacts: getContacts(),
+        contacts: data,
+      };
+    });
+  }
+
+  async onDeleteHandler(id) {
+    await deleteContact(id);
+    // update the contact state
+
+    const { data } = await getContacts();
+
+    this.setState(() => {
+      return {
+        contacts: data,
       };
     });
   }
