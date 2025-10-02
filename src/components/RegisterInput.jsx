@@ -1,86 +1,43 @@
 import React from "react";
 import PropTypes from "prop-types";
+import useInput from "../hooks/useInput";
 
-class RegisterInput extends React.Component {
-  constructor(props) {
-    super(props);
+const RegisterInput = ({ register }) => {
+  const [name, onNameChange] = useInput("");
+  const [email, onEmailChange] = useInput("");
+  const [password, onPasswordChange] = useInput("");
 
-    this.state = {
-      name: "",
-      email: "",
-      password: "",
-    };
-
-    // binding handler input
-    this.onNameChange = this.onNameChange.bind(this);
-    this.onEmailChange = this.onEmailChange.bind(this);
-    this.onPasswordChange = this.onPasswordChange.bind(this);
-    this.onSubmitHandler = this.onSubmitHandler.bind(this);
-  }
-
-  //   handler input
-  onNameChange(e) {
-    this.setState(() => {
-      return {
-        name: e.target.value,
-      };
-    });
-  }
-
-  onEmailChange(e) {
-    this.setState(() => {
-      return {
-        email: e.target.value,
-      };
-    });
-  }
-
-  onPasswordChange(e) {
-    this.setState(() => {
-      return {
-        password: e.target.value,
-      };
-    });
-  }
-
-  onSubmitHandler(e) {
+  const onSubmitHandler = (e) => {
     e.preventDefault();
+    register({ name, email, password });
+  };
 
-    this.props.register({
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-    });
-  }
+  return (
+    <form onSubmit={onSubmitHandler} className="register-input">
+      <input
+        type="text"
+        placeholder="Nama"
+        value={name}
+        onChange={onNameChange}
+      />
+      <input
+        type="email"
+        placeholder="Email"
+        value={email}
+        onChange={onEmailChange}
+      />
+      <input
+        type="password"
+        placeholder="Password"
+        value={password}
+        onChange={onPasswordChange}
+        autoComplete="current-password"
+      />
 
-  render() {
-    return (
-      <form onSubmit={this.onSubmitHandler} className="register-input">
-        <input
-          type="text"
-          placeholder="Nama"
-          value={this.state.name}
-          onChange={this.onNameChange}
-        />
-        <input
-          type="email"
-          placeholder="Email"
-          value={this.state.email}
-          onChange={this.onEmailChange}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={this.state.password}
-          onChange={this.onPasswordChange}
-          autoComplete="current-password"
-        />
-
-        <button>Register</button>
-      </form>
-    );
-  }
-}
+      <button>Register</button>
+    </form>
+  );
+};
 
 RegisterInput.propTypes = {
   register: PropTypes.func.isRequired,
